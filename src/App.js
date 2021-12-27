@@ -5,7 +5,8 @@ import web3 from './web3';
 
 class App extends React.Component {
   render() {
-    console.log(web3.version);
+    //console.log(web3.version);
+    //web3.eth.getAccounts().then(console.log); //shows account address connected (ctrl+shift & I)
     return (
       <div className="App">
         <header className="App-header">
