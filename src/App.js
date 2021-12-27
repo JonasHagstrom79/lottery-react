@@ -13,7 +13,8 @@ class App extends React.Component {
     players: [],
     //set to empty string
     balance: "",
-    value: ""
+    value: "",
+    message: ""
   };
   //lifecycle method
   async componentDidMount() {
@@ -30,6 +31,8 @@ class App extends React.Component {
     //sends a transaction to the enter function
     //get a list of our accounts
     const accounts = await web3.eth.getAccounts();
+    //tells the user the current status of the application
+    this.setState({message: "Waiting on transaction success..."});
     
     await lottery.methods.enter().send({
       //sends from the first account in the array
@@ -37,6 +40,8 @@ class App extends React.Component {
       //converts to Wei b4 sending it into the transaction
       value: web3.utils.toWei(this.state.value, "ether")
     });
+
+    this.setState({message: "You have been entered!"});
   };
 
 
@@ -63,6 +68,10 @@ class App extends React.Component {
           </div>
           <button>Enter</button>
         </form>
+
+        <hr/>
+
+        <h1>{this.state.message}</h1>
       </div>
     );
   }
